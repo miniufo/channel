@@ -1,0 +1,156 @@
+# ====================
+# | Model parameters |
+# ====================
+#
+# Continuous equation parameters
+#
+#   tRef            - Reference vertical potential temperature          (deg C)
+#   sRef            - Reference vertical salinity                         (PSU)
+#   viscAh          - Horizontal eddy viscosity coefficient             (m^2/s)
+#   viscAz          - Vertical eddy viscosity coefficient               (m^2/s)
+#   diffKhT         - Horizontal temperature diffusivity                (m^2/s)
+#   diffKzT         - Vertical temperature diffusivity                  (m^2/s)
+#   diffKhS         - Horizontal salt diffusivity                       (m^2/s)
+#   diffKzS         - Vertical salt diffusivity                         (m^2/s)
+#   gravity         - Acceleration due to gravity                       (m/s^2)
+#   rigidLid        - Set to true to use rigid lid
+#   implicitFreeSurface - Set to true to use implicit free surface
+#   eosType         - Flag for linear or polynomial equation of state
+#   momAdvection    - On/Off flag for momentum self transport
+#   momViscosity    - On/Off flag for momentum mixing
+#
+ &PARM01
+ viscAh=12.0,
+ viscA4=9E8,
+# viscC2Smag=1.0,
+# viscC2Leith=1.5,
+ viscAr=3e-4,
+ diffKhT=0.0,
+ diffKrT=0.5E-5,
+# diffKhS=2.E1,
+# diffKrS=2.E-5,
+ no_slip_sides=.TRUE.,
+ no_slip_bottom=.TRUE.,
+# bottomDragQuadratic=0.002,
+ bottomDragLinear=1.1e-3,
+# useStrainTensionVisc=.TRUE.,
+ vectorInvariantMomentum=.TRUE.,
+ multiDimAdvection=.TRUE.,
+# rigidLid=.TRUE.,
+ implicitFreeSurface=.TRUE.,
+ tAlpha=2.E-4,
+ rhoConstFresh=999.8,
+ tempAdvScheme=80,
+ tempVertAdvScheme=80,
+# saltAdvScheme=80,
+# saltVertAdvScheme=80,
+# 25N values:
+# f0=6.16346443E-5,
+# beta=2.0745844E-11,
+# 20N values:
+ f0=-1e-4,
+ beta=1e-11,
+# 15N values:
+# f0=3.77461677E-5,
+# beta=2.2110531E-11,
+# select_rStar=2,
+# nonlinFreeSurf=3,
+ eosType='LINEAR',
+ exactConserv=.FALSE.,
+# ivdc_kappa=10.0,
+ readBinaryPrec=32,
+ writeBinaryPrec=32,
+ saltStepping=.FALSE.,
+# tempStepping=.TRUE.,
+# momStepping=.TRUE.,
+# useRealFreshWaterFlux=.FALSE.,
+ implicitDiffusion=.TRUE.,
+ implicitViscosity=.TRUE.,
+ useSingleCpuIO=.TRUE.,
+ &
+
+# Elliptic solver parameters
+#
+#   cg2dMaxIters       - Maximum number of 2d solver iterations
+#   cg2dTargetResidual - Solver target residual
+#
+ &PARM02
+ cg2dMaxIters=800,
+ cg2dTargetResidual=1E-10,
+ &
+
+# Time stepping parameters
+#
+#   startTime         - Integration starting time                (s)
+#   endTime           - Integration ending time                  (s)
+#   tauCD             - CD scheme coupling timescale             (s)
+#   deltaTMom         - Timestep for momemtum equations          (s)
+#   deltaTtracer      - Tracer timestep                          (s)
+#   deltaTClock       - Timestep used as model "clock"           (s)
+#   abEps             - Adams-Bashforth stabilising factor
+#   pChkPtFreq        - Frequency of permanent check pointing    (s)
+#   chkPtFreq         - Frequency of rolling check pointing      (s)
+#   dumpFreq          - Frequency at which model state is stored (s)
+#   tauThetaClimRelax - Relaxation to climatology time scale     (s)
+#   tauSaltClimRelax  - Relaxation to climatology time scale     (s)
+#
+ &PARM03
+ nIter0=6220800,
+#startTime=0,
+endTime=3110400300
+#endTime=1871424000
+ deltaTmom=300.0,
+ deltaTtracer=300.0,
+ deltaTClock =300.0,
+ abEps=0.1,
+ pChkptFreq=311040000.,
+# pChkptFreq=31104000.,
+ chkptFreq= 0.,
+ dumpFreq = 0.,
+ dumpInitAndLast = .FALSE.,
+ taveFreq = 0.,
+ monitorFreq=2592000.,
+ pickupStrictlyMatch=.FALSE.,
+ &
+
+# Gridding parameters
+#
+#   usingSphericalPolarGrid - On/Off flag for spherical polar coordinates
+#   delX                    - Zonal grid spacing         (degrees)
+#   delY                    - Meridional grid spacing    (degrees)
+#   delZ                    - Vertical grid spacing      (m)
+#   ygOrigin                - Southern boundary latitude (degrees)
+#
+ &PARM04
+ usingCartesianGrid=.TRUE.,
+ delX=200*5E3,
+ delY=400*5E3,
+ delR= 10, 10, 15, 20, 20, 20, 30, 30, 30, 30,
+       50, 50, 70, 70,100,100,100,100,100,150,
+      150,150,200,200,200,200,250,250,250,250,
+# ygOrigin=15,
+# xgOrigin=140.0,
+# rSphere = 6371200,
+ &
+
+# Input datasets
+#
+#   bathyFile       - File containing bathymetry
+#   hydrogThetaFile - File containing initial potential temperature data
+#   hydrogSaltFile  - File containing initial salinity data
+#   zonalWindFile   - File containing zonal wind data
+#   meridWindFile   - File containing meridional wind data
+#   thetaClimFile   - File containing theta climatology used for relaxation
+#   saltClimFile    - File containing salt climatology used for relaxation
+#
+ &PARM05
+ the_run_name    = 'channel',
+ zonalWindFile   = './EXF/windStr.dat',
+ surfQnetFile    = './EXF/heatFlx.dat',
+ bathyFile       = './BATH/bath.dat',
+ hydrogThetaFile = './IC/initT.dat',
+# hydrogSaltFile  = './IC/salt_SCS_IC.dat',
+# uVelInitFile    = './IC/u_SCS_IC.dat',
+# vVelInitFile    = './IC/v_SCS_IC.dat',
+# pSurfInitFile   = './IC/ssh_SCS_IC.dat',
+ &

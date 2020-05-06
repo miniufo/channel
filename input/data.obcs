@@ -1,0 +1,83 @@
+# Open-boundaries
+ &OBCS_PARM01
+# This flag turns off checking and fixing problematic topography across 
+# open boundaries.
+ OBCSfixTopo=.TRUE.,
+ OB_Jnorth= 200*-1,
+# OB_Jsouth= 200*1,
+# OB_Ieast = 400*-1,
+# OB_Iwest = 400*1,
+ 
+ useOBCSprescribe = .TRUE.,
+
+ useOBCSbalance =.FALSE.,
+# OBCS_balanceFacE = 1.,
+# OBCS_balanceFacW = 1.,
+# OBCS_balanceFacN = 1.,
+# OBCS_balanceFacS = 1.,
+
+
+ useOBCSsponge =.TRUE.,
+ OBCSsponge_N=.TRUE.,
+ OBCSsponge_S=.FALSE.,
+ OBCSsponge_E=.FALSE.,
+ OBCSsponge_W=.FALSE.,
+ OBCSsponge_Theta=.TRUE.,
+ OBCSsponge_Salt=.FALSE.,
+# OBCSsponge_UatEW=.FALSE.,
+# OBCSsponge_VatEW=.FALSE.,
+
+# useOrlanskiNorth =.FALSE.,
+# useOrlanskiEast  =.FALSE.,
+# useOrlanskiWest  =.FALSE.,
+# useOrlanskiSouth =.TRUE.,
+
+ OBNuFile = './OBCS/uProf.dat',
+# OBSuFile = './OBCS/OBCSuHYCOMS.dat',
+# OBWuFile = './OBCS/OBCSuHYCOMW_correct.dat',
+# OBEuFile = './OBCS/OBCSuHYCOME_correct.dat',
+
+ OBNvFile = './OBCS/vProf.dat',
+# OBSvFile = './OBCS/OBCSvHYCOMS_correct.dat',
+# OBWvFile = './OBCS/OBCSvHYCOMW.dat',
+# OBEvFile = './OBCS/OBCSvHYCOME.dat',
+
+ OBNtFile = './OBCS/prescrT.dat',
+# OBStFile = './OBCS/OBCStHYCOMS.dat',
+# OBWtFile = './OBCS/OBCStHYCOMW.dat',
+# OBEtFile = './OBCS/OBCStHYCOME.dat',
+ 
+# OBNsFile = './OBCS/OBCSsHYCOMN.dat',
+# OBSsFile = './OBCS/OBCSsHYCOMS.dat',
+# OBWsFile = './OBCS/OBCSsHYCOMW.dat',
+# OBEsFile = './OBCS/OBCSsHYCOME.dat',
+ 
+ OBCS_monitorFreq= 2592000.,
+ OBCS_monSelect = 1,
+ &
+
+# Orlanski parameters
+ &OBCS_PARM02
+#Cmax=0.45,
+#cVelTimeScale=2000.,
+#useFixedCEast=.FALSE.,
+#useFixedCWest=.FALSE.,
+ &
+
+# Sponge parameters
+ &OBCS_PARM03
+# for east-west BCs
+# Urelaxobcsinner = 86400.,
+# Urelaxobcsbound = 86400.,
+# for north-south BCs
+ Vrelaxobcsinner = 0.,
+ Vrelaxobcsbound = 62208000.,
+ spongeThickness = 20,
+ &
+
+# Stevens parameters
+ &OBCS_PARM04
+# TrelaxStevens = 86400.,
+# SrelaxStevens = 86400.,
+ &
+

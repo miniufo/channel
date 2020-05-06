@@ -1,4 +1,4 @@
-# xgrads
+# channel simulation
 
 ![3D plot](./pics/animate3D.gif)
 
